@@ -16,9 +16,9 @@ export default function Modal({data,modalview,setModalView}) {
     document.body.classList.remove('active-modal')
   }
 
-//   useEffect(()=>{
-//     fetch(`https://api.datamuse.com/words?rel_syn=${data}`).then(res => res.json()).then((data)=>setDesc(data))
-//   },[data])
+  useEffect(()=>{
+    fetch(`https://api.datamuse.com/words?rel_syn=${data}`).then(res => res.json()).then((data)=>setDesc(data))
+  },[data])
 
 
   return (
