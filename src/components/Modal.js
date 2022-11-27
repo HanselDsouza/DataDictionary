@@ -25,11 +25,11 @@ export default function Modal({data,modalview,setModalView,type,search}) {
       if(response.status !== 404){
         response = await response.json()
         setDesc(response)
+        console.log(response)
       }
     }
     fetchData()
-    console.log(desc,status)
-  },[])
+  },[data])
 
   return (
     <>
@@ -40,17 +40,16 @@ export default function Modal({data,modalview,setModalView,type,search}) {
             <h2 className="text-white font-bold text-xl capitalize">{data}
               <span className="text-xs px-1 text-slate-400">{type.slice(0,-1)} of {search}</span>
             </h2>
-            {/* <p className="py-5 text-white">
+            <p className="py-5 text-white">
               {!desc && status !== 400 ? <div>Loading...</div>: 
               <>
               <ul>
                 {desc?.map((data)=>(
-                <li className="capitalize">- {data?.text}</li>
+                <li className="capitalize" key={data.text}>- {data?.text}</li>
                 ))}
               </ul>
               </>}
-              
-            </p> */}
+            </p>
             </div>
             <button className="close-modal text-white text-2xl font-bold hover:text-red-500" onClick={toggleModal}>
                 <IoIosCloseCircleOutline/>
