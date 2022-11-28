@@ -23,6 +23,7 @@ const Fields = () => {
                 {types.map((data)=>(
                 <option value={data} className="capitalize">{data}</option>
                 ))}
+                
               </select>
             </div>
            <button onClick={handleSubmit} className='bg-slate-500 p-2 rounded-md hover:shadow-2xl font-bold text-white hover:bg-slate-300 hover:text-slate-700'>Submit</button>
