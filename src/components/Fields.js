@@ -6,11 +6,14 @@ const Fields = () => {
     const [word,setWord] = useState('')
     const [wordList,setWordList] = useState([])
     const [val,setVal] = useState(types[0])
+    const [submission,setSubmission] = useState(false)
     const types_ref = {'Synonyms':'syn','Adjectives':'jjb','Nouns':'jja','Antonyms':'ant','Rhymes':'rhy','Homophones':'hom'}
     const handleSubmit = async (e) =>{
+        setSubmission(true)
         e.preventDefault()
         await fetch(`https://api.datamuse.com/words?rel_${types_ref[val]}=${word}`).then(res => res.json()).then((data)=>setWordList(data))
-    }
+        setSubmission(false)
+      }
 
   return (
     <div className='w-full flex justify-center items-center flex-col'>
@@ -23,13 +26,12 @@ const Fields = () => {
                 {types.map((data)=>(
                 <option value={data} className="capitalize">{data}</option>
                 ))}
-                
               </select>
             </div>
            <button onClick={handleSubmit} className='bg-slate-500 p-2 rounded-md hover:shadow-2xl font-bold text-white hover:bg-slate-300 hover:text-slate-700'>Submit</button>
             </div>
         </form>
-        {wordList.length > 0 && <Display data={wordList} type={val} search={word}/>}
+        {submission ? <p className="text-white">Loading...</p> :<Display data={wordList} type={val} search={word}/>}
     </div>
   )
 }
